@@ -1,6 +1,7 @@
 #ifndef _EXCEPTION_H
 #define _EXCEPTION_H
 #include <iostream>
+#include <string>
 
 namespace mtm
 {
@@ -49,7 +50,51 @@ namespace mtm
         ~IllegalBrackets() = default;
         const char* what() const noexcept override;
     };
+
+    class CannotWriteToFile : public Exception
+    { 
+        std::string message;
+    public:
+        CannotWriteToFile() = delete;
+        CannotWriteToFile(const std::string& filename) : 
+        Exception(("Cannot write to the file " + '"' + filename + "\".")), message(header += description) { }
+        ~CannotWriteToFile() = default;
+        const char* what() const noexcept override;
+    };
+
+    class CannotReadFromFile : public Exception
+    { 
+        std::string message;
+    public:
+        CannotReadFromFile() = delete;
+        CannotReadFromFile(const std::string& filename) : 
+        Exception(("Cannot write to the file " + '"' + filename + "\".")), message(header += description) { }
+        ~CannotReadFromFile() = default;
+        const char* what() const noexcept override;
+    };
+
+    class FileIllegalVertexName : public Exception
+    { 
+        std::string message;
+    public:
+        FileIllegalVertexName() = delete;
+        FileIllegalVertexName(const std::string& vertex) : 
+        Exception(("The file contains an illegal vertex name - " + '\"' + vertex + "\".")), message(header += description) { }
+        ~FileIllegalVertexName() = default;
+        const char* what() const noexcept override;
+    };
     
+    class FileInvalidEdge : public Exception
+    { 
+        std::string message;
+    public:
+        FileInvalidEdge() = delete;
+        FileInvalidEdge(const std::pair<std::string, std::string>& edge) : 
+        Exception(("The file contains an invalid edge - " + '<' + edge.first + ',' + edge.second + ">.")), message(header += description) { }
+        ~FileInvalidEdge() = default;
+        const char* what() const noexcept override;
+    };
+
     class IllegalVertexName : public GraphException
     { 
         std::string message;

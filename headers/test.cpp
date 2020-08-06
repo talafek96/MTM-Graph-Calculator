@@ -1,4 +1,3 @@
-#include "GraphParser.h"
 #include "graph.h"
 using namespace mtm;
 
@@ -27,17 +26,21 @@ void testGraphParser()
 {
     std::string line;
     std::getline(std::cin, line);
-    GraphParser parser(line);
+    graph G;
     try
     {
-        parser.evaluate();
+        G = graph(line);
     }
     catch(const mtm::Exception& e)
     {
         std::cout << e.what() << '\n';
         return;
     }
-    std::cout << "Legal graph literal!" << '\n';
+    std::cout << "Legal graph literal! This is your graph:" << '\n'
+    << G << '\n';
+    graph::save(G, "graph.gc");
+    graph G2 = graph::load("graph.gc");
+    std::cout << std::endl << "This is the graph that was saved and loaded back:" << std::endl << G2;
 }
 
 int main()

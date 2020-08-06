@@ -3,7 +3,6 @@
 #include <stack>
 #include <map>
 #include <cctype>
-#include "graph.h"
 #include "Exception.h"
 
 namespace mtm
@@ -36,9 +35,6 @@ namespace mtm
         // A bool variable is enough to determine proper
         // use of angular brackets.
         bool abrac_seen = false;
-
-        // This map will only be used in the main parser.
-        std::map<std::string, graph> graph_map;
     };
 
     class LexerClass
