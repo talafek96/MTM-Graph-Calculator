@@ -83,6 +83,17 @@ namespace mtm
         ~FileIllegalVertexName() = default;
         const char* what() const noexcept override;
     };
+
+    class FileDuplicateVertex : public Exception
+    { 
+        std::string message;
+    public:
+        FileDuplicateVertex() = delete;
+        FileDuplicateVertex(const std::string& vertex) : 
+        Exception(("The vertex " + '\"' + vertex + "\" appears more than once. All vertices must be unique.")), message(header += description) { }
+        ~FileDuplicateVertex() = default;
+        const char* what() const noexcept override;
+    };
     
     class FileInvalidEdge : public Exception
     { 
@@ -172,6 +183,16 @@ namespace mtm
         VertexInEdgeDoesNotExist() : 
         GraphException("An edge that has been entered contains a vertex that does not exist in the graph."), message(header += description) { }
         ~VertexInEdgeDoesNotExist() = default;
+        const char* what() const noexcept override;
+    };
+
+    class DuplicateVertex : public GraphException
+    { 
+        std::string message;
+    public:
+        DuplicateVertex() : 
+        GraphException("Duplicate vertices were detected. All vertices must be unique."), message(header += description) { }
+        ~DuplicateVertex() = default;
         const char* what() const noexcept override;
     };
     

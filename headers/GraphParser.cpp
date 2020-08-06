@@ -12,6 +12,10 @@ namespace mtm
         {
             case Type::variable:
             {
+                if(vertices.count(lexer.getCurrentToken().name))
+                {
+                    throw DuplicateVertex();
+                }
                 vertices.insert(lexer.getCurrentToken().name);
                 lexer.fetchNextToken();
                 if(lexer.getCurrentToken().type == Type::comma)

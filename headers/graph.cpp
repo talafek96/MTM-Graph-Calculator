@@ -177,6 +177,10 @@ namespace mtm
             {
                 throw FileIllegalVertexName(vertex);
             }
+            if(result.vertices.count(vertex))
+            {
+                throw FileDuplicateVertex(vertex);
+            }
             result.vertices.insert(vertex);
         }
         for(unsigned i = 0; i < num_edges; i++)

@@ -30,6 +30,11 @@ namespace mtm
         return message.c_str();
     }
 
+    const char* FileDuplicateVertex::what() const noexcept
+    {
+        return message.c_str();
+    }
+
     const char* FileInvalidEdge::what() const noexcept
     {
         return message.c_str();
@@ -71,6 +76,11 @@ namespace mtm
     }
 
     const char* VertexInEdgeDoesNotExist::what() const noexcept
+    {
+        return message.c_str();
+    }
+    
+    const char* DuplicateVertex::what() const noexcept
     {
         return message.c_str();
     }
