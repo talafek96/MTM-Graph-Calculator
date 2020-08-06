@@ -13,11 +13,10 @@ namespace mtm
         Token fetchNextVertexToken();
         Token fetchNextEdgeToken();
     public:
-        GraphLexer() : 
-        LexerClass(), line_met(false), comma_met(false) { }
+        GraphLexer() = delete;
+        GraphLexer(const std::string& str) :
+        LexerClass(str), line_met(false) { }
 
-        GraphLexer(std::istream& stream) :
-        LexerClass(stream), line_met(false) { }
         Token fetchNextToken() override;
         bool isLineMet() const;
     };

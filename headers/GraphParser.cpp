@@ -59,7 +59,7 @@ namespace mtm
                 {
                     throw VertexInEdgeDoesNotExist();
                 }
-                pair.second = lexer.getCurrentToken().name; //Save second vertex
+                pair.second = lexer.getCurrentToken().name; // Save second vertex
                 if(lexer.fetchNextToken().type != Type::abrac_close)
                 {
                     throw IllegalEdgeName();
@@ -68,11 +68,13 @@ namespace mtm
                 {
                     throw ParallelSelfEdgeDetected();
                 }
-                edges.insert(pair); //Insert edge
+                edges.insert(pair); // Insert edge
 
-                lexer.fetchNextToken(); //Eat the '>' token.
+                lexer.fetchNextToken(); // Eat the '>' token.
                 return;
             }
+            case Type::end: case Type::eof:
+                break;
             default:
             {
                 throw EdgeSyntaxError();
@@ -83,14 +85,18 @@ namespace mtm
     void GraphParser::edgeList(bool get_next_token)
     {
         edge(get_next_token);
-        lexer.fetchNextToken();
-        switch(lexer.getCurrentToken().type)
+        if(lexer.getCurrentToken().type != Type::end)
         {
-            case Type::comma:
-                edgeList(true);
-                break;
-            default:
-                throw EdgeSyntaxError();
+            switch(lexer.getCurrentToken().type)
+            {
+                case Type::comma:
+                    edgeList(true);
+                    break;
+                case Type::end:
+                    break;
+                default:
+                    throw EdgeSyntaxError();
+            }
         }
     }
 
@@ -99,15 +105,14 @@ namespace mtm
         lexer.fetchNextToken();
         switch(lexer.getCurrentToken().type)
         {
-            case Type::end: case Type::eof:
+            case Type::end:
             {
                 return;
             }
             case Type::line:
             {
                 lexer.fetchNextToken();
-                if(lexer.getCurrentToken().type != Type::end
-                || lexer.getCurrentToken().type != Type::eof)
+                if(lexer.getCurrentToken().type != Type::end)
                 {
                     throw IllegalGraphLiteral();
                 }
@@ -118,7 +123,7 @@ namespace mtm
                 vertexList(false);
                 switch(lexer.getCurrentToken().type)
                 {
-                    case Type::end: case Type::eof:
+                    case Type::end:
                     {
                         return;
                     }
@@ -127,13 +132,17 @@ namespace mtm
                         lexer.fetchNextToken();
                         switch(lexer.getCurrentToken().type)
                         {
-                            case Type::end: case Type::eof:
+                            case Type::end:
                             {
                                 return;
                             }
                             case Type::abrac_open:
                             {
                                 edgeList(false);
+                                if(lexer.getCurrentToken().type != Type::end)
+                                {
+                                    throw IllegalGraphLiteral();
+                                }
                                 return;
                             }
                             default:

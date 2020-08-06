@@ -15,7 +15,7 @@ namespace mtm
         //lac = look-ahead-character
         char lac = 0;
 
-        //Get the next char from the stream
+        //Get the next char from the string
         getNextChar(lac);
         if(comma_met)
         {
@@ -62,7 +62,7 @@ namespace mtm
                     {
                         current_token.sbrac_stack.push(Type::sbrac_open);
                     }
-                    while(stream.get(lac) && 
+                    while((lac = text[(++text_iterator)]) && 
                     (std::isalnum(lac) || lac == ';' || lac == '[' || lac == ']'))
                     {
                         switch(lac)
@@ -99,10 +99,10 @@ namespace mtm
                     }
                     /*
                      * At this point, lac is not a part of a variable anymore,
-                     * so we have to push it back to the stream for
+                     * so we have rewind the text iterator to make
                      * further assessments.
                      */
-                    stream.putback(lac);
+                    text_iterator--;
                     current_token.type = Type::variable;
                 }
                 else if(lac == 0 || lac == EOF || (isspace(lac) && !isblank(lac)))
@@ -133,7 +133,7 @@ namespace mtm
         //lac = look-ahead-character
         char lac = 0;
 
-        //Get the next char from the stream
+        //Get the next char from the string
         getNextChar(lac);
         switch(lac)
         {
@@ -186,7 +186,7 @@ namespace mtm
                     {
                         current_token.sbrac_stack.push(Type::sbrac_open);
                     }
-                    while(stream.get(lac) && 
+                    while((lac = text[++text_iterator]) && 
                     (std::isalnum(lac) || lac == ';' || lac == '[' || lac == ']'))
                     {
                         switch(lac)
@@ -223,10 +223,10 @@ namespace mtm
                     }
                     /*
                      * At this point, lac is not a part of a variable anymore,
-                     * so we have to push it back to the stream for
+                     * so we have to rewind the text iterator to make
                      * further assessments.
                      */
-                    stream.putback(lac);
+                    text_iterator--;
                     current_token.type = Type::variable;
                 }
                 else if(lac == 0 || lac == EOF || (isspace(lac) && !isblank(lac)))

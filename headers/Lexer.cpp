@@ -1,10 +1,15 @@
 #include "Lexer.h"
 namespace mtm
 {
-    std::istream& LexerClass::getNextChar(char& c)
+    const char LexerClass::getNextChar(char& c)
     {
-        while(stream.get(c) && std::isspace(c));
-        return stream;
+        text_iterator++;
+        while(std::isspace(text[text_iterator]))
+        {
+            text_iterator++;
+        }
+        c = text[text_iterator];
+        return c;
     }
 
     Token& LexerClass::getCurrentToken()

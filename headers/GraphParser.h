@@ -11,10 +11,10 @@ namespace mtm
         // This is the root of the descent parse tree.
         evaluate:
             end (V) //EOS or EOF
-            '|' (V)
-            vertexList (V)
-            vertexList '|' (V)
-            vertexList '|' edgeList (V)
+            '|' end (V)
+            vertexList end (V)
+            vertexList '|' end (V)
+            vertexList '|' edgeList end (V)
         
         vertexList: (function finishes at the next token)
             variable (V)
@@ -39,7 +39,9 @@ namespace mtm
         void edgeList(bool get_next_token);
         void edge(bool get_next_token);
     public:
-        explicit GraphParser(std::istream& stream) : lexer(stream) { }
+        GraphParser() = delete;
+        explicit GraphParser(const std::string& str) : lexer(str) { }
+        
         void evaluate();
    };
 }

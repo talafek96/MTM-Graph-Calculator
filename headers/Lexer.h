@@ -18,7 +18,7 @@ namespace mtm
         curl_open = '{', curl_close = '}',
         abrac_open = '<', abrac_close = '>',
         comp = '!', line = '|', comma = ',',
-        variable, error
+        variable = char(403), error
     };
 
     const std::string keywords[] = {
@@ -44,18 +44,20 @@ namespace mtm
     class LexerClass
     {
     protected:
-        std::istream& stream;
+        std::string text;
+        int text_iterator;
         Token current_token;
     public:
-        LexerClass() : stream(std::cin) { }
-        LexerClass(std::istream& stream) : stream(stream) { }
+        LexerClass() = delete;
+        LexerClass(const std::string& str) : 
+        text(str), text_iterator(-1) { }
 
         Token& getCurrentToken();
         virtual Token fetchNextToken() = 0;
 
-        // Move the stream up to the next non-whitespace char
+        // Move the string up to the next non-whitespace char
         // and write it in c
-        std::istream& getNextChar(char& c);
+        const char getNextChar(char& c);
     };
 }
 #endif

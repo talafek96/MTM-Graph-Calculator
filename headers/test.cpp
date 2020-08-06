@@ -1,10 +1,10 @@
-#include "GraphLexer.h"
+#include "GraphParser.h"
 #include "graph.h"
 using namespace mtm;
 
 void testGraphLexer()
 {
-    GraphLexer lexer;
+    GraphLexer lexer("a[;[];][] | <abc,c>");
     while(lexer.fetchNextToken().type != Type::end)
     {
         switch(lexer.getCurrentToken().type)
@@ -23,8 +23,26 @@ void testGraphLexer()
     }
 }
 
+void testGraphParser()
+{
+    std::string line;
+    std::getline(std::cin, line);
+    GraphParser parser(line);
+    try
+    {
+        parser.evaluate();
+    }
+    catch(const mtm::Exception& e)
+    {
+        std::cout << e.what() << '\n';
+        return;
+    }
+    std::cout << "Legal graph literal!" << '\n';
+}
+
 int main()
 {
-    testGraphLexer();
+    // testGraphLexer();
+    testGraphParser();
     return 0;
 }

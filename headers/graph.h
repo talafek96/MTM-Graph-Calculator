@@ -3,6 +3,7 @@
 #include <iostream>
 #include <set>
 #include <utility>
+#include "GraphParser.h"
 
 namespace mtm
 {
