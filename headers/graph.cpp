@@ -163,10 +163,9 @@ namespace mtm
         {
             throw CannotReadFromFile(filename);
         }
-        unsigned num_vertices, num_edges, first_strlen, second_strlen;
+        unsigned num_vertices, num_edges;
         std::string vertex;
         std::pair<std::string, std::string> edge;
-        char* buffer;
         graph result;
         fd.read(reinterpret_cast<char *>(&num_vertices), sizeof(num_vertices));
         fd.read(reinterpret_cast<char *>(&num_edges), sizeof(unsigned));
@@ -189,7 +188,8 @@ namespace mtm
             }
             result.edges.insert(edge);
         }
-        if(!fd.eof())
+
+        if(fd.peek() != EOF)
         {
             throw CorruptFile();
         }
