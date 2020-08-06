@@ -11,13 +11,14 @@ namespace mtm
     //Classify the different token types
     enum class Type : char
     {
-        end, plus = '+', intersection = '^',
-        diff = '-', product = '*', comp = '!',
+        end, eof = EOF, semicolon = ';', plus = '+',
+        intersection = '^', diff = '-', product = '*',
         brac_open = '(', brac_close = ')',
-        cbrac_open = '[', cbrac_close = ']',
+        sbrac_open = '[', sbrac_close = ']',
         curl_open = '{', curl_close = '}',
-        line = '|', variable
-
+        abrac_open = '<', abrac_close = '>',
+        comp = '!', line = '|', comma = ',',
+        variable, error
     };
 
     const std::string keywords[] = {
@@ -30,8 +31,11 @@ namespace mtm
         std::string name;
         // Use stacks to ensure the weight of the brackets.
         std::stack<Type> brac_stack;
-        std::stack<Type> cbrac_stack;
+        std::stack<Type> sbrac_stack;
         std::stack<Type> curly_stack;
+        // A bool variable is enough to determine proper
+        // use of angular brackets.
+        bool abrac_seen = false;
 
         // This map will only be used in the main parser.
         std::map<std::string, graph> graph_map;

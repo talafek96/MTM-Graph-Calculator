@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Exception.h"
 
 namespace mtm
@@ -7,7 +6,52 @@ namespace mtm
     /*          Exception          */
     /*******************************/
     Exception::Exception() :
-    header("Error: "), exception_name("Unknown Error") { }
+    header("Error: "), description("Unknown Error.") { }
     Exception::Exception(const std::string error) :
-    header("Error: "), exception_name(error) { }
+    header("Error: "), description(error) {}
+
+    const char* IllegalBrackets::what() const noexcept
+    {
+        return message.c_str();
+    }
+
+    const char* IllegalVertexName::what() const noexcept
+    {
+        return message.c_str();
+    }
+
+    const char* IllegalEdgeName::what() const noexcept
+    {
+        return message.c_str();
+    }
+
+    const char* IllegalComma::what() const noexcept
+    {
+        return message.c_str();
+    }
+
+    const char* IllegalGraphLiteral::what() const noexcept
+    {
+        return message.c_str();
+    }
+
+    const char* VertexSyntaxError::what() const noexcept
+    {
+        return message.c_str();
+    }
+
+    const char* EdgeSyntaxError::what() const noexcept
+    {
+        return message.c_str();
+    }
+
+    const char* VertexInEdgeDoesNotExist::what() const noexcept
+    {
+        return message.c_str();
+    }
+
+    const char* ParallelSelfEdgeDetected::what() const noexcept
+    {
+        return message.c_str();
+    }
 }
