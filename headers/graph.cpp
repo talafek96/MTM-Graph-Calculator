@@ -189,6 +189,10 @@ namespace mtm
             }
             result.edges.insert(edge);
         }
+        if(!fd.eof())
+        {
+            throw CorruptFile();
+        }
         return result;
     }
 
@@ -200,6 +204,11 @@ namespace mtm
 
         char* buffer = new char[vertex_strlen + 1];
         fd.read(buffer, vertex_strlen);
+        if(fd.fail())
+        {
+            delete[] buffer;
+            throw CorruptFile();
+        }
         buffer[vertex_strlen] = '\0';
 
         vertex = std::string(buffer);
@@ -217,6 +226,11 @@ namespace mtm
         fd.read(reinterpret_cast<char *>(&left_size), sizeof(left_size));
         char* left_buffer = new char[left_size + 1];
         fd.read(left_buffer, left_size);
+        if(fd.fail())
+        {
+            delete[] left_buffer;
+            throw CorruptFile();
+        }
         left_buffer[left_size] = '\0';
         edge.first = std::string(left_buffer);
         delete[] left_buffer;
@@ -224,6 +238,11 @@ namespace mtm
         fd.read(reinterpret_cast<char *>(&right_size), sizeof(right_size));
         char* right_buffer = new char[right_size + 1];
         fd.read(right_buffer, right_size);
+        if(fd.fail())
+        {
+            delete[] right_buffer;
+            throw CorruptFile();
+        }
         right_buffer[right_size] = '\0';
         edge.second = std::string(right_buffer);
         delete[] right_buffer;

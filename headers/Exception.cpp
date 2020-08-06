@@ -35,6 +35,11 @@ namespace mtm
         return message.c_str();
     }
 
+    const char* CorruptFile::what() const noexcept
+    {
+        return message.c_str();
+    }
+
     const char* IllegalVertexName::what() const noexcept
     {
         return message.c_str();

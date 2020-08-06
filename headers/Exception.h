@@ -95,6 +95,16 @@ namespace mtm
         const char* what() const noexcept override;
     };
 
+    class CorruptFile : public Exception
+    { 
+        std::string message;
+    public:
+        CorruptFile() : 
+        Exception("The file is corrupted or in wrong format and cannot be analyzed."), message(header += description) { }
+        ~CorruptFile() = default;
+        const char* what() const noexcept override;
+    };
+
     class IllegalVertexName : public GraphException
     { 
         std::string message;
