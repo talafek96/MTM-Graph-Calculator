@@ -96,7 +96,7 @@ namespace mtm
         {
             out << vertex << std::endl;
         }
-        out << '&';
+        out << '$';
         for(auto edge : G.edges)
         {
             out << std::endl << edge.first << ' ' << edge.second;
