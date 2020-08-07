@@ -111,14 +111,14 @@ namespace mtm
         {
             throw CannotWriteToFile(filename);
         }
-        int num_vertices = G.vertices.size();
-        int num_edges = G.edges.size();
-        fd.write((char*)&num_vertices, sizeof(int));
-        fd.write((char*)&num_edges, sizeof(int));
+        unsigned num_vertices = G.vertices.size();
+        unsigned num_edges = G.edges.size();
+        fd.write(reinterpret_cast<char*>(&num_vertices), sizeof(num_vertices));
+        fd.write(reinterpret_cast<char*>(&num_edges), sizeof(num_edges));
         for(auto vertex : G.vertices)
         {
-            int vertex_strlen = vertex.size();
-            fd.write((char*)&vertex_strlen, sizeof(int));
+            unsigned vertex_strlen = vertex.size();
+            fd.write(reinterpret_cast<char*>(&vertex_strlen), sizeof(vertex_strlen));
             fd.write(vertex.c_str(), vertex_strlen);
         }
         for(auto edge : G.edges)
@@ -168,7 +168,15 @@ namespace mtm
         std::pair<std::string, std::string> edge;
         graph result;
         fd.read(reinterpret_cast<char *>(&num_vertices), sizeof(num_vertices));
+        if(fd.fail())
+        {
+            throw CorruptFile();
+        }
         fd.read(reinterpret_cast<char *>(&num_edges), sizeof(unsigned));
+        if(fd.fail())
+        {
+            throw CorruptFile();
+        }
 
         for(unsigned i = 0; i < num_vertices; i++)
         {
@@ -186,7 +194,8 @@ namespace mtm
         for(unsigned i = 0; i < num_edges; i++)
         {
             edge = readEdge(fd);
-            if(!result.vertices.count(edge.first) || !result.vertices.count(edge.second))
+            if((!result.vertices.count(edge.first) || !result.vertices.count(edge.second))
+            || edge.first == edge.second || result.edges.count(edge))
             {
                 throw FileInvalidEdge(edge);
             }
@@ -205,6 +214,10 @@ namespace mtm
         std::string vertex;
         unsigned vertex_strlen;
         fd.read(reinterpret_cast<char *>(&vertex_strlen), sizeof(vertex_strlen));
+        if(fd.fail())
+        {
+            throw CorruptFile();
+        }
 
         char* buffer = new char[vertex_strlen + 1];
         fd.read(buffer, vertex_strlen);
@@ -225,31 +238,9 @@ namespace mtm
     std::pair<std::string, std::string> graph::readEdge(std::ifstream& fd)
     {
         std::pair<std::string, std::string> edge;
-        unsigned left_size, right_size;
 
-        fd.read(reinterpret_cast<char *>(&left_size), sizeof(left_size));
-        char* left_buffer = new char[left_size + 1];
-        fd.read(left_buffer, left_size);
-        if(fd.fail())
-        {
-            delete[] left_buffer;
-            throw CorruptFile();
-        }
-        left_buffer[left_size] = '\0';
-        edge.first = std::string(left_buffer);
-        delete[] left_buffer;
-
-        fd.read(reinterpret_cast<char *>(&right_size), sizeof(right_size));
-        char* right_buffer = new char[right_size + 1];
-        fd.read(right_buffer, right_size);
-        if(fd.fail())
-        {
-            delete[] right_buffer;
-            throw CorruptFile();
-        }
-        right_buffer[right_size] = '\0';
-        edge.second = std::string(right_buffer);
-        delete[] right_buffer;
+        edge.first = readVertex(fd);
+        edge.second = readVertex(fd);
 
         return edge;
     }

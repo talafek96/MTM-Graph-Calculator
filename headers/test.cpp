@@ -47,5 +47,16 @@ int main()
 {
     // testGraphLexer();
     testGraphParser();
+    // graph G;
+    // try
+    // {
+    //     G = graph::load("graph.gc");
+    // }
+    // catch(const mtm::Exception& e)
+    // {
+    //     std::cout << e.what() << '\n';
+    //     return 1;
+    // }
+    // std::cout << "The graph that was loaded is: \n" << G;
     return 0;
 }

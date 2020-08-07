@@ -89,4 +89,24 @@ namespace mtm
     {
         return message.c_str();
     }
+
+    const char* UnrecognizedCommand::what() const noexcept
+    {
+        return message.c_str();
+    }
+
+    const char* UndefinedVariable::what() const noexcept
+    {
+        return message.c_str();
+    }
+
+    const char* FunctionSyntaxError::what() const noexcept
+    {
+        return message.c_str();
+    }
+
+    const char* FunctionIllegalArgument::what() const noexcept
+    {
+        return message.c_str();
+    }
 }

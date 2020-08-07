@@ -251,16 +251,11 @@ namespace mtm
                     }
                     else
                     {
-                        throw IllegalEdgeName();
+                        throw EdgeSyntaxError();
                     }
                 }
                 return current_token;
             }
         }
     } // End of fetchNextEdgeToken
-
-    bool GraphLexer::isLineMet() const
-    {
-        return line_met;
-    }
 }

@@ -1,27 +1,29 @@
 #ifndef LEXER_H
 #define LEXER_H
 #include <stack>
-#include <map>
 #include <cctype>
 #include "Exception.h"
+
+#define TYPE_KEYWORDS_INDEX 399
 
 namespace mtm
 {
     //Classify the different token types
     enum class Type : char
     {
-        end, eof = EOF, semicolon = ';', plus = '+',
+        end, semicolon = ';', plus = '+',
         intersection = '^', diff = '-', product = '*',
         brac_open = '(', brac_close = ')',
         sbrac_open = '[', sbrac_close = ']',
         curl_open = '{', curl_close = '}',
         abrac_open = '<', abrac_close = '>',
-        comp = '!', line = '|', comma = ',',
-        variable = char(403), error
+        comp = '!', line = '|', comma = ',', equal = '=',
+        variable = char(TYPE_KEYWORDS_INDEX), file, graph_literal,
+        rvalue_keyword, void_keyword, error
     };
 
     const std::string keywords[] = {
-        "print", "delete", "who", "reset", "quit"
+        "print", "save", "load", "delete", "who", "reset", "quit"
     };
 
     struct Token
@@ -31,9 +33,8 @@ namespace mtm
         // Use stacks to ensure the weight of the brackets.
         std::stack<Type> brac_stack;
         std::stack<Type> sbrac_stack;
-        std::stack<Type> curly_stack;
         // A bool variable is enough to determine proper
-        // use of angular brackets.
+        // use of angular brackets/curly brackets.
         bool abrac_seen = false;
     };
 

@@ -18,7 +18,6 @@ namespace mtm
         LexerClass(str), line_met(false) { }
 
         Token fetchNextToken() override;
-        bool isLineMet() const;
     };
 }
 #endif

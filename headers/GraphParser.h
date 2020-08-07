@@ -27,8 +27,8 @@ namespace mtm
         edge:
             '<' variable ',' variable '>' (V)
     */
-   class GraphParser
-   {
+    class GraphParser
+    {
     private:
         GraphLexer lexer;
         std::set<std::string> vertices;
@@ -40,9 +40,9 @@ namespace mtm
         void edge(bool get_next_token);
     public:
         GraphParser() = delete;
-        explicit GraphParser(const std::string& str) : lexer(str) { }
+        GraphParser(const std::string& str) : lexer(str) { }
         
         void evaluate();
-   };
+    };
 }
 #endif

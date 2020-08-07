@@ -77,7 +77,7 @@ namespace mtm
                 lexer.fetchNextToken(); // Eat the '>' token.
                 return;
             }
-            case Type::end: case Type::eof:
+            case Type::end:
                 break;
             default:
             {
@@ -161,6 +161,10 @@ namespace mtm
                         throw VertexSyntaxError();
                     }
                 }
+            }
+            default:
+            {
+                throw VertexSyntaxError();
             }
         }
     }
