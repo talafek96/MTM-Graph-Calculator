@@ -1,4 +1,4 @@
-#include "graph.h"
+#include "GraphClass.h"
 using namespace mtm;
 
 void testGraphLexer()

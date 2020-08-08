@@ -1,7 +1,7 @@
 #ifndef CALC_PARSER_H
 #define CALC_PARSER_H
 #include "CalcLexer.h"
-#include "graph.h"
+#include "GraphClass.h"
 #include <map>
 
 namespace mtm

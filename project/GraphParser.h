@@ -1,7 +1,7 @@
 #ifndef GRAPH_PARSER_H
 #define GRAPH_PARSER_H
 #include "GraphLexer.h"
-#include "graph.h"
+#include "GraphClass.h"
 
 namespace mtm
 {

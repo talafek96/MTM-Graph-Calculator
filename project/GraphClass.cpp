@@ -1,4 +1,4 @@
-#include "graph.h"
+#include "GraphClass.h"
 #include <vector>
 
 namespace mtm
