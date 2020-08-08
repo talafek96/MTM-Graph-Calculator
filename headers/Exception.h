@@ -249,6 +249,16 @@ namespace mtm
         const char* what() const noexcept override;
     };
 
+    class InvalidVariableName : public CalcException
+    {
+        std::string message;
+    public:
+        InvalidVariableName() :
+        CalcException("Invalid variable name. All variables must begin with an alphabetic letter."), message(header += description) { }
+        ~InvalidVariableName() = default;
+        const char* what() const noexcept override;
+    };
+
     class FunctionSyntaxError : public CalcException
     {
         std::string message;

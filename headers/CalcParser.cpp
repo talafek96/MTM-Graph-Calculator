@@ -2,6 +2,8 @@
 
 namespace mtm
 {
+    std::map<std::string, graph> CalcParser::memory;
+
     graph CalcParser::term(bool get_next_token)
     {
         if(get_next_token)
@@ -82,33 +84,37 @@ namespace mtm
     graph CalcParser::rvalue(bool get_next_token)
     {
         graph g = term(get_next_token);
-        if(lexer.getCurrentToken().type != Type::end)
+        while(lexer.getCurrentToken().type != Type::end)
         {
             switch(lexer.getCurrentToken().type)
             {
-                case Type::plus:
+                case Type::plus: //G2*G3+G1
                 {
-                    return g + rvalue(true);
+                    g = term(true) + g;
+                    break;
                 }
 
                 case Type::diff:
                 {
-                    return g - rvalue(true);
+                    g = term(true) - g;
+                    break;
                 }
 
                 case Type::intersection:
                 {
-                    return g ^ rvalue(true);
+                    g = term(true) ^ g;
+                    break;
                 }
 
                 case Type::product:
                 {
-                    return g * rvalue(true);
+                    g = term(true) * g;
+                    break;
                 }
 
                 default:
                 {
-                    throw UnrecognizedCommand(lexer.getText());
+                    return g;
                 }
             }
         }
@@ -145,7 +151,7 @@ namespace mtm
                         throw FunctionSyntaxError("print");
                     }
                     graph g = rvalue(true);
-                    if(lexer.fetchNextToken().type != Type::brac_close)
+                    if(lexer.getCurrentToken().type != Type::brac_close)
                     {
                         throw FunctionSyntaxError("print");
                     }
@@ -153,7 +159,7 @@ namespace mtm
                     {
                         throw UnrecognizedCommand(lexer.getText());
                     }
-                    *stream << g;
+                    *stream << g << std::endl;
                 }
                 else if(lexer.getCurrentToken().name == "save")
                 {
@@ -161,8 +167,9 @@ namespace mtm
                     {
                         throw FunctionSyntaxError("save");
                     }
+                    save_flag = true;
                     graph g = rvalue(true);
-                    if(lexer.fetchNextToken().type != Type::comma)
+                    if(lexer.getCurrentToken().type != Type::comma)
                     {
                         throw FunctionSyntaxError("save");
                     }
@@ -214,12 +221,7 @@ namespace mtm
                     }
                     for(auto it = memory.begin(); it != memory.end(); it++)
                     {
-                        *stream << it->first;
-
-                        if(std::next(it) != memory.end())
-                        {
-                            *stream << std::endl;
-                        }
+                        *stream << it->first << std::endl;
                     }
                 }
                 else if(lexer.getCurrentToken().name == "quit")
@@ -242,5 +244,10 @@ namespace mtm
                 throw UnrecognizedCommand(lexer.getText());
             }
         }
+    } // End of evaluate().
+
+    bool CalcParser::quitFlag() const
+    {
+        return quit_flag;
     }
 }

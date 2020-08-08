@@ -45,8 +45,12 @@ namespace mtm
         CalcLexer lexer;
         std::ostream* stream;
         bool quit_flag = false;
+        bool save_flag = false;
 
         static std::map<std::string, graph> memory;
+
+        graph term(bool get_next_token);
+        graph rvalue(bool get_next_token);
 
     public:
         CalcParser() = delete;
@@ -54,8 +58,7 @@ namespace mtm
         lexer(str), stream(stream) { }
 
         void evaluate();
-        graph rvalue(bool get_next_token);
-        graph term(bool get_next_token);
+        bool quitFlag() const;
     };
 }
 #endif

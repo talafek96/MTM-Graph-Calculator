@@ -10,8 +10,8 @@ namespace mtm
             {
                 return true;
             }
-            return false;
         }
+        return false;
     }
 
     std::string CalcLexer::getText() const
@@ -28,7 +28,7 @@ namespace mtm
             {
                 throw FunctionIllegalFileName(func_name);
             }
-            current_token.name += text[text_iterator];
+            current_token.name += text[text_iterator++];
         }
         // text_iterator currently points to a ')' char, so we decrement it for
         // further token assessments.
@@ -83,18 +83,6 @@ namespace mtm
             save_flag[2] = false;
             return current_token;
         }
-        // if(save_flag[1] && !std::isalpha(lac))
-        // {
-        //     throw FunctionIllegalArgument("save");
-        // }
-        // if(save_flag[2] && lac != ',')
-        // {
-        //     throw FunctionIllegalArgument();
-        // }
-        // if(save_flag[3] && lac != ')')
-        // {
-
-        // }
 
         switch(lac)
         {
@@ -112,13 +100,13 @@ namespace mtm
                 // Move the text iterator to the beginning of the graph literal
                 // and start recording:
                 current_token.name = text[++text_iterator];
-                while(text[text_iterator] && text[text_iterator] != '}')
+                while(text[text_iterator + 1] && text[text_iterator + 1] != '}')
                 {
                     // Record the current letter and increment the iterator.
-                    current_token.name = text[text_iterator++];
+                    current_token.name += text[++text_iterator];
                 }
-                // At this point, the text iterator points to '}', so
-                // we increment it in order to "eat" it.
+                // At this point, the text iterator points to one character
+                // before '}'/EOF, so we increment it in order to "eat" it.
                 text_iterator++;
 
                 current_token.type = Type::graph_literal;
@@ -152,15 +140,16 @@ namespace mtm
                 }
                 current_token.brac_stack.pop();
                 current_token.type = Type::brac_close;
+                return current_token;
             }
             default:
             {
                 if(std::isalpha(lac))
                 {
                     current_token.name = lac;
-                    while((lac = text[++text_iterator]) && std::isalnum(lac))
+                    while(text[text_iterator + 1] && std::isalnum(text[text_iterator + 1]))
                     {
-                        current_token.name += lac;
+                        current_token.name += text[++text_iterator];
                     }
                     current_token.type = Type::variable;
 
@@ -187,6 +176,10 @@ namespace mtm
                             current_token.type = Type::void_keyword;
                         }
                     }
+                }
+                else if(std::isdigit(lac))
+                {
+                    throw InvalidVariableName();
                 }
                 else if(lac == '\0' || lac == EOF || (std::isspace(lac) && !isblank(lac)))
                 {

@@ -100,12 +100,22 @@ namespace mtm
         return message.c_str();
     }
 
+    const char* InvalidVariableName::what() const noexcept
+    {
+        return message.c_str();
+    }
+
     const char* FunctionSyntaxError::what() const noexcept
     {
         return message.c_str();
     }
 
     const char* FunctionIllegalArgument::what() const noexcept
+    {
+        return message.c_str();
+    }
+
+    const char* FunctionIllegalFileName::what() const noexcept
     {
         return message.c_str();
     }
