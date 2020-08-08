@@ -206,7 +206,7 @@ namespace mtm
         std::string message;
     public:
         DuplicateVertex() : 
-        GraphException("Duplicate vertices were detected. All vertices must be unique."), 
+        GraphException("Duplicate vertex was detected. All vertices must be unique."), 
         message(header += description) { }
         ~DuplicateVertex() = default;
         const char* what() const noexcept override;

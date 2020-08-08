@@ -17,7 +17,6 @@ namespace mtm
 
         static std::string readVertex(std::ifstream& fd);
         static std::pair<std::string, std::string> readEdge(std::ifstream& fd);
-        static bool isVertexNameValid(const std::string& vertex);
 
     public:
         graph() = default;
@@ -28,6 +27,10 @@ namespace mtm
 
         static void save(const graph& G, const std::string& filename);
         static graph load(const std::string& filename);
+        static bool isVertexNameValid(const std::string& vertex);
+
+        void addVertex(const std::string& v);
+        void addEdge(const std::string& v1, const std::string& v2);
 
         graph operator+(const graph& other) const;
         graph operator^(const graph& other) const;

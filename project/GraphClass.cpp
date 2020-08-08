@@ -244,4 +244,32 @@ namespace mtm
 
         return edge;
     }
+
+    void graph::addVertex(const std::string& v)
+    {
+        if(!isVertexNameValid(v))
+        {
+            throw IllegalVertexName();
+        }
+        if(vertices.count(v))
+        {
+            throw DuplicateVertex();
+        }
+        vertices.insert(v);
+    }
+
+    void graph::addEdge(const std::string& v1, const std::string& v2)
+    {
+        std::pair<std::string, std::string> edge = { std::string(v1), std::string(v2) };
+        if(!isVertexNameValid(v1) || !isVertexNameValid(v2))
+        {
+            throw IllegalVertexName();
+        }
+        if((!vertices.count(v1) || !vertices.count(v2))
+        || v1 == v2 || edges.count(edge))
+        {
+            throw IllegalEdgeName();
+        }
+        edges.insert(edge);
+    }
 }
