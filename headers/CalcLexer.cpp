@@ -187,7 +187,9 @@ namespace mtm
                     {
                         throw IllegalBrackets();
                     }
-                    current_token = { Type::end };
+                    Token end_token;
+                    end_token.type = Type::end;
+                    current_token = end_token;
                 }
                 else if(lac == ',' && save_flag[1])
                 {
@@ -197,7 +199,9 @@ namespace mtm
                 }
                 else
                 {
-                    current_token.type = { Type::error };
+                    Token end_token;
+                    end_token.type = Type::end;
+                    current_token = end_token;
                     throw UnrecognizedCommand(text);
                 }
                 return current_token;

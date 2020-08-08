@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
         }
         default:
         {
-            std::cerr << "Error: Syntax error: ./gcalc | ./gcalc [input_file.txt] [output_file.txt]";
+            std::cerr << "Error: Syntax error - ./gcalc | ./gcalc [input_file.txt] [output_file.txt]" << std::endl;
             return 1;
         }
     }

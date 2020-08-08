@@ -115,7 +115,9 @@ namespace mtm
                     {
                         throw IllegalComma();
                     }
-                    current_token = { Type::end };
+                    Token end_token;
+                    end_token.type = Type::end;
+                    current_token = end_token;
                 }
                 else
                 {
@@ -239,7 +241,9 @@ namespace mtm
                     {
                         throw IllegalComma();
                     }
-                    current_token = { Type::end };
+                    Token end_token;
+                    end_token.type = Type::end;
+                    current_token = end_token;
                 }
                 else
                 {
