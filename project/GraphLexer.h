@@ -7,15 +7,15 @@ namespace mtm
     class GraphLexer : public LexerClass
     {
     private:
-        bool line_met;
-        bool comma_met;
+        bool line_met = false;
+        bool comma_met = false;
 
         Token fetchNextVertexToken();
         Token fetchNextEdgeToken();
     public:
         GraphLexer() = delete;
         GraphLexer(const std::string& str) :
-        LexerClass(str), line_met(false) { }
+        LexerClass(str), line_met(false), comma_met(false) { }
 
         Token fetchNextToken() override;
     };

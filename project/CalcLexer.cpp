@@ -97,17 +97,28 @@ namespace mtm
                 {
                     throw IllegalBrackets();
                 }
-                // Move the text iterator to the beginning of the graph literal
-                // and start recording:
-                current_token.name = text[++text_iterator];
-                while(text[text_iterator + 1] && text[text_iterator + 1] != '}')
+                // Check if the graph literal is empty:
+                int i = text_iterator;
+                if(getNextChar(lac) == '}')
                 {
-                    // Record the current letter and increment the iterator.
-                    current_token.name += text[++text_iterator];
+                    text_iterator++;
+                    current_token.name.clear();
                 }
-                // At this point, the text iterator points to one character
-                // before '}'/EOF, so we increment it in order to "eat" it.
-                text_iterator++;
+                else // The graph literal is not empty:
+                {
+                    text_iterator = i;
+                    // Move the text iterator to the beginning of the graph literal
+                    // and start recording:
+                    current_token.name = text[++text_iterator];
+                    while(text[text_iterator + 1] && text[text_iterator + 1] != '}')
+                    {
+                        // Record the current letter and increment the iterator.
+                        current_token.name += text[++text_iterator];
+                    }
+                    // At this point, the text iterator points to one character
+                    // before '}'/EOF, so we increment it in order to "eat" it.
+                    text_iterator++;
+                }
 
                 current_token.type = Type::graph_literal;
                 return current_token;
