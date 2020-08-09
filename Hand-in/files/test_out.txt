@@ -1,0 +1,110 @@
+Error: Unrecognized command.
+Error: Invalid edge. A parallel edge or a self loop was found.
+Error: Duplicate vertex was detected. All vertices must be unique.
+Error: Encountered a syntax error while processing the vertices.
+Error: Illegal comma useage.
+Error: Illegal comma useage.
+Error: Invalid edge. A parallel edge or a self loop was found.
+Error: Illegal brackets useage.
+Error: Illegal edge name.
+Error: Illegal comma useage.
+Error: Encountered a syntax error while processing the edges.
+Error: Illegal edge name.
+Error: Encountered a syntax error while processing the edges.
+Error: Invalid variable name. All variables must begin with an alphabetic letter.
+Error: Unrecognized command.
+[x;a]
+[x;b]
+[y;a]
+[y;b]
+a
+b
+$
+[y;a] [x;b]
+a b
+a
+b
+$
+a b
+x
+y
+$
+x y
+[a;x]
+[a;y]
+[b;x]
+[b;y]
+$
+[a;x] [b;y]
+a
+b
+x
+y
+$
+a b
+x y
+G
+G1
+G2
+G3
+G4
+H
+Error: Undefined variable "G".
+a
+b
+m
+n
+p
+$
+b a
+m n
+p n
+a
+b
+$
+a b
+Error: Illegal brackets useage.
+Error: The file contains an invalid edge - <y,y>.
+Error: The vertex "a" appears more than once. All vertices must be unique.
+Error: Cannot read from file "trololol.gc".
+[x;x]
+y
+$
+Error: Function syntax error "save".
+Error: Illegal vertex name.
+Error: Unrecognized command.
+Error: Cannot read from file "yousuck.gc".
+Error: Cannot read from file "you suck.gc".
+Error: Unrecognized command.
+Error: Unrecognized command.
+Error: Unrecognized command.
+[[a;x];[x;a]]
+[[a;x];[x;b]]
+[[a;x];[y;a]]
+[[a;x];[y;b]]
+[[a;y];[x;a]]
+[[a;y];[x;b]]
+[[a;y];[y;a]]
+[[a;y];[y;b]]
+[[b;x];[x;a]]
+[[b;x];[x;b]]
+[[b;x];[y;a]]
+[[b;x];[y;b]]
+[[b;y];[x;a]]
+[[b;y];[x;b]]
+[[b;y];[y;a]]
+[[b;y];[y;b]]
+$
+[[a;x];[x;a]] [[a;y];[y;b]]
+[[a;x];[x;a]] [[b;x];[y;b]]
+[[a;y];[x;a]] [[a;x];[y;b]]
+[[a;y];[x;a]] [[b;x];[y;b]]
+[[a;y];[x;a]] [[b;y];[y;b]]
+[[b;x];[x;a]] [[a;x];[y;b]]
+[[b;x];[x;a]] [[a;y];[y;b]]
+[[b;x];[x;a]] [[b;y];[y;b]]
+[[b;y];[x;a]] [[a;x];[y;b]]
+[[b;y];[x;a]] [[a;y];[y;b]]
+[[b;y];[x;a]] [[b;x];[y;b]]
+Error: Undefined variable "Troll".
+Error: Undefined variable "FinalBoss".

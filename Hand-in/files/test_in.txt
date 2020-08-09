@@ -1,0 +1,62 @@
+G = 
+G={}
+G= { }
+G ={|}
+G = {a}
+G = {a|}
+G = {a|<a,a>}
+G = {a, a,b | <a,b>}
+G = {, a,b | <a,b>}
+G={a,b,}
+G={a,b, | <a,b>}
+G= {a,b|<a,b>, <a,b>}
+G1 = {a,b | <a,b>}
+G1 = {a, b | <a,b}
+G1 = {a,b|<<a,b>}
+G1 = {a,b|<a,b>,}
+G1 = {a,b| ,<a,b>}
+G1 = {a,b | <a,b>>}
+G1 = {a,b | <a,b> <b,a>}
+1G = {x, y | <x,y>}
+G2 = {x,y | <x,y>}
+G3 = G1+G2
+G3 = G3-G2
+G3 = G1*G2
+G4 = G1+G2^G1
+G4 = G4+G2
+H = G1+(!G2*(G4-(G2)))
+(print(H))
+print(H)
+print((G1))
+print( G2)
+print( G3 )
+print(G4 ) 
+who
+delete(G)
+delete(G)
+print({m,n,p | <m,n>, <p,n>}+!(G4-G2))
+save(H , hello world.gc )
+save( G1, G1 .gc)
+print(load(hello world.gc) ^load( G1 .gc ))
+print(load(hello world.gc) ^load( G1 .gc )
+print(load(sucks to be you haha.gc))
+print(load(trololol .gc ) )
+print(load(trololol.gc))
+saver = {x}
+loader = {y}
+save(saver,loader )
+print(saver * load(loader) + loader)
+save({hehexd, [[;[lol];]] | <hehexd, [[;[lol];]]>}+!{x}-!{}, you suck.gc )
+print({[];[], a[];})
+printer = print(load (you suck.gc) )
+print(load( yousuck.gc))
+print(load(you suck.gc ) + load(loader)) 
+FINAL BOSS = G1
+FinalBoss = !!(!(G1*G2)*(G2*G1))
+Troll = G1()
+Troll = G1 + ()
+print(FinalBoss)
+print(Troll)
+reset
+who
+print(FinalBoss)

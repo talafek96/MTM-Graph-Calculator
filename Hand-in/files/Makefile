@@ -1,7 +1,7 @@
 CC=/usr/local/bin/gcc
 CXX=/usr/local/bin/g++
 OBJS=main.o Lexer.o GraphParser.o GraphLexer.o GraphClass.o CalcParser.o CalcLexer.o Exception.o
-SOBJS=graph.o GraphClass.o Exception.o GraphLexer.o GraphParser.o
+SOBJS=graph.o GraphClass.o Exception.o GraphLexer.o GraphParser.o Lexer.o
 EXEC=gcalc
 COMP_FLAGS=-std=c++11 -Wall -Werror -pedantic-errors -DNDEBUG
 
@@ -27,7 +27,7 @@ GraphParser.o: GraphParser.cpp GraphParser.h GraphLexer.h Lexer.h Exception.h Gr
 	$(CXX) -c $(COMP_FLAGS) -fPIC $*.cpp
 
 Lexer.o: Lexer.cpp Lexer.h Exception.h
-	$(CXX) -c $(COMP_FLAGS) $*.cpp
+	$(CXX) -c $(COMP_FLAGS) -fPIC $*.cpp
 
 GraphClass.o: GraphClass.cpp GraphClass.h Exception.h GraphParser.h GraphLexer.h Lexer.h
 	$(CXX) -c $(COMP_FLAGS) -fPIC $*.cpp
