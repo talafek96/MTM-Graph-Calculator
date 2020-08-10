@@ -65,6 +65,7 @@ $
 a b
 Error: Illegal brackets useage.
 Error: The file contains an invalid edge - <y,y>.
+Error: The file is corrupted or in wrong format and cannot be analyzed.
 Error: The vertex "a" appears more than once. All vertices must be unique.
 Error: Cannot read from file "trololol.gc".
 [x;x]

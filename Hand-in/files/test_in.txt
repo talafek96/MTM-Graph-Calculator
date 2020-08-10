@@ -40,6 +40,7 @@ save( G1, G1 .gc)
 print(load(hello world.gc) ^load( G1 .gc ))
 print(load(hello world.gc) ^load( G1 .gc )
 print(load(sucks to be you haha.gc))
+print(load( feels bad man.gc ))
 print(load(trololol .gc ) )
 print(load(trololol.gc))
 saver = {x}

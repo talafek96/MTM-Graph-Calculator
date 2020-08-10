@@ -68,7 +68,7 @@ void runCalculator(std::istream* in, std::ostream* out, bool print_gcalc)
         }
         catch(const std::exception& e)
         {
-            std::cerr << e.what() << '\n';
+            std::cerr << "Error: " << e.what() << '\n';
             quit_flag = true;
         }
         if(!quit_flag)
