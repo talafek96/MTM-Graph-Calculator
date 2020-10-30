@@ -39,7 +39,7 @@ main.o: main.cpp CalcParser.h CalcLexer.h Lexer.h Exception.h GraphClass.h Graph
 	$(CXX) -c $(COMP_FLAGS) $*.cpp
 
 clean :
-	rm -f $(OBJS) $(EXEC) libgraph.a _graph.so graph.py graph_wrap.c graph_wrap.cpp graph.o gcalc.zip
+	rm -f $(OBJS) $(EXEC) libgraph.a _graph.so graph.py graph_wrap.c graph_wrap.cpp graph.o
 
 tar :
 	zip -r gcalc.zip ./

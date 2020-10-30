@@ -10,7 +10,7 @@ graph* create()
     }
     catch(const std::exception& e)
     {
-        std::cerr << "Error: " << e.what() << '\n';
+        std::cout << "Error: " << e.what() << '\n';
     }
     return new_graph;
 }
@@ -42,7 +42,7 @@ graph* addVertex(graph* graph, const char* v)
     }
     catch(const std::exception& e)
     {
-        std::cerr << "Error: " << e.what() << '\n';
+        std::cout << e.what() << '\n';
         return nullptr;
     }
     return graph;
@@ -66,7 +66,7 @@ graph* addEdge(graph* graph, const char* v1, const char* v2)
     }
     catch(const std::exception& e)
     {
-        std::cerr << "Error: " << e.what() << '\n';
+        std::cout << e.what() << '\n';
         return nullptr;
     }
     return graph;

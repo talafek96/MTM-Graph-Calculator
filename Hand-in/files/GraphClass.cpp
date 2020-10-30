@@ -149,13 +149,6 @@ namespace mtm
 
     bool graph::isVertexNameValid(const std::string& vertex)
     {
-        std::string whitespaces (" \t\f\v\n\r");
-
-        std::size_t found = vertex.find_first_of(whitespaces);
-        if (found!=std::string::npos)
-        {
-            return false;
-        }
         GraphLexer lexer(vertex);
         for(lexer.fetchNextToken(); lexer.getCurrentToken().type != Type::end; lexer.fetchNextToken())
         {
